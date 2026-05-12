@@ -1,0 +1,346 @@
+:root {
+    --bg-primary: #060816;
+    --bg-secondary: rgba(15, 23, 42, 0.72);
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --text-muted: #94a3b8;
+    --accent: #60a5fa;
+    --success: #22c55e;
+    --danger: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+body.dashboard-bg {
+    background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.18), transparent 35%),
+        linear-gradient(135deg, #020617 0%, #0f172a 45%, #020617 100%);
+    overflow-x: hidden;
+}
+
+/* floating background glows */
+.bg-orb {
+    position: fixed;
+    border-radius: 9999px;
+    filter: blur(70px);
+    opacity: 0.45;
+    z-index: 0;
+    animation: floaty 18s ease-in-out infinite;
+}
+
+.orb-1 {
+    width: 320px;
+    height: 320px;
+    background: rgba(59, 130, 246, 0.35);
+    top: 80px;
+    left: -80px;
+}
+
+.orb-2 {
+    width: 280px;
+    height: 280px;
+    background: rgba(168, 85, 247, 0.28);
+    top: 35%;
+    right: -60px;
+    animation-delay: 4s;
+}
+
+.orb-3 {
+    width: 260px;
+    height: 260px;
+    background: rgba(34, 197, 94, 0.18);
+    bottom: 60px;
+    left: 30%;
+    animation-delay: 8s;
+}
+
+@keyframes floaty {
+    0% {
+        transform: translateY(0px) translateX(0px);
+    }
+    50% {
+        transform: translateY(-30px) translateX(20px);
+    }
+    100% {
+        transform: translateY(0px) translateX(0px);
+    }
+}
+
+/* glass cards */
+.glass-card {
+    background: var(--bg-secondary);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid var(--border-glass);
+    border-radius: 24px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* buttons */
+.action-btn {
+    border: 1px solid rgba(96, 165, 250, 0.35);
+    background: rgba(59, 130, 246, 0.16);
+    color: white;
+    padding: 0.9rem 1.4rem;
+    border-radius: 14px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(59, 130, 246, 0.26);
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.18);
+}
+
+/* text */
+.metric-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+}
+
+.metric-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.metric-value.small {
+    font-size: 1.3rem;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+/* leaderboard */
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard-table thead th {
+    text-align: left;
+    padding: 1rem 0.9rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.leaderboard-table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.leaderboard-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.leaderboard-table tbody td {
+    padding: 1rem 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.95rem;
+}
+
+.rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.rank-1 {
+    background: linear-gradient(135deg, #f59e0b, #facc15);
+    color: #111827;
+}
+
+.rank-2 {
+    background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+    color: #111827;
+}
+
+.rank-3 {
+    background: linear-gradient(135deg, #f97316, #fb923c);
+    color: #111827;
+}
+
+.accuracy-pill {
+    padding: 0.4rem 0.75rem;
+    border-radius: 9999px;
+    background: rgba(34, 197, 94, 0.12);
+    color: #86efac;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* timeline */
+.match-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.25rem;
+}
+
+.match-card {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 1.2rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.match-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.3);
+}
+
+.match-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.match-meta {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 0.9rem;
+}
+
+.winner-tag {
+    display: inline-block;
+    padding: 0.45rem 0.8rem;
+    border-radius: 9999px;
+    background: rgba(96, 165, 250, 0.14);
+    border: 1px solid rgba(96, 165, 250, 0.18);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.prediction-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.prediction-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.025);
+    padding: 0.65rem 0.8rem;
+    border-radius: 14px;
+}
+
+.prediction-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.prediction-result {
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.correct {
+    color: var(--success);
+}
+
+.wrong {
+    color: var(--danger);
+}
+
+/* loader */
+.loader {
+    width: 54px;
+    height: 54px;
+    border: 5px solid rgba(255, 255, 255, 0.08);
+    border-top: 5px solid var(--accent);
+    border-radius: 9999px;
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* chart sizing */
+canvas {
+    max-height: 360px;
+}
+
+/* hidden utility */
+.hidden {
+    display: none !important;
+}
+
+/* responsive */
+@media (max-width: 1024px) {
+    .metric-value {
+        font-size: 1.8rem;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .leaderboard-table thead {
+        display: none;
+    }
+
+    .leaderboard-table,
+    .leaderboard-table tbody,
+    .leaderboard-table tr,
+    .leaderboard-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .leaderboard-table tr {
+        padding: 1rem;
+        border-radius: 18px;
+        margin-bottom: 1rem;
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    .leaderboard-table td {
+        border: none;
+        padding: 0.45rem 0;
+    }
+
+    .match-grid {
+        grid-template-columns: 1fr;
+    }
+}

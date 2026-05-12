@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ app_name }}</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="dashboard-bg text-white min-h-screen">
+
+    <!-- Background glow -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-6 py-10">
+
+        <!-- Header -->
+        <section class="mb-10">
+            <div class="glass-card p-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div>
+                        <h1 class="text-5xl font-bold tracking-tight">
+                            🏆 IPL Prediction League
+                        </h1>
+                        <p class="text-slate-300 mt-3 text-lg">
+                            Live leaderboard powered by Cricinfo match data
+                        </p>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button onclick="loadDashboard()" class="action-btn">
+                            Refresh Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary cards -->
+        <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+
+            <div class="glass-card p-6">
+                <p class="metric-label">Completed Matches</p>
+                <h2 id="completed-count" class="metric-value">--</h2>
+            </div>
+
+            <div class="glass-card p-6">
+                <p class="metric-label">Pending Matches</p>
+                <h2 id="pending-count" class="metric-value">--</h2>
+            </div>
+
+            <div class="glass-card p-6">
+                <p class="metric-label">Current Leader</p>
+                <h2 id="top-performer" class="metric-value small">--</h2>
+            </div>
+
+            <div class="glass-card p-6">
+                <p class="metric-label">Longest Streak</p>
+                <h2 id="longest-streak" class="metric-value small">--</h2>
+            </div>
+
+        </section>
+
+        <!-- Leaderboard + participant chart -->
+        <section class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-10">
+
+            <!-- Leaderboard -->
+            <div class="glass-card p-6 xl:col-span-2">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="section-title">Leaderboard</h2>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Score</th>
+                                <th>Attempted</th>
+                                <th>Accuracy</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Score chart -->
+            <div class="glass-card p-6">
+                <h2 class="section-title mb-6">Participant Scores</h2>
+                <canvas id="scores-chart"></canvas>
+            </div>
+
+        </section>
+
+        <!-- Analytics -->
+        <section class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-10">
+
+            <!-- Team popularity -->
+            <div class="glass-card p-6">
+                <h2 class="section-title mb-6">Team Popularity</h2>
+                <canvas id="team-chart"></canvas>
+            </div>
+
+            <!-- Biggest upset -->
+            <div class="glass-card p-6">
+                <h2 class="section-title mb-6">Biggest Upset</h2>
+
+                <div class="space-y-4">
+                    <div>
+                        <p class="metric-label">Match</p>
+                        <p id="biggest-upset-match" class="metric-value small">--</p>
+                    </div>
+
+                    <div>
+                        <p class="metric-label">Winner</p>
+                        <p id="biggest-upset-winner" class="metric-value small">--</p>
+                    </div>
+
+                    <div>
+                        <p class="metric-label">Votes</p>
+                        <p id="biggest-upset-votes" class="metric-value small">--</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Match timeline -->
+        <section class="glass-card p-6 mb-10">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="section-title">Completed Match Timeline</h2>
+            </div>
+
+            <div id="match-timeline" class="match-grid">
+            </div>
+        </section>
+
+        <!-- Loading -->
+        <section id="loading-state" class="glass-card p-10 text-center">
+            <div class="loader mx-auto mb-6"></div>
+            <h3 class="text-2xl font-semibold">Loading dashboard...</h3>
+        </section>
+
+        <!-- Error -->
+        <section id="error-state" class="glass-card p-10 text-center hidden">
+            <h3 class="text-2xl font-semibold text-red-400 mb-4">
+                Failed to load dashboard
+            </h3>
+            <p id="error-message" class="text-slate-300"></p>
+        </section>
+
+    </main>
+
+    <script src="/static/dashboard.js"></script>
+</body>
+</html>
